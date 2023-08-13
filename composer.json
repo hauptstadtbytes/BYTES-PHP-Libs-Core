@@ -1,5 +1,5 @@
 {
-    "name": "bytes/php-libs",
+    "name": "bytes/php-libs-core",
     "description": "Generic PHP classes for rapid prototyping and software development",
     "type": "library",
     "license": "proprietary",
@@ -15,5 +15,7 @@
         }
     ],
     "minimum-stability": "dev",
-    "require": {}
+    "require": {
+        "php": ">=8.1.0"
+    }
 }
