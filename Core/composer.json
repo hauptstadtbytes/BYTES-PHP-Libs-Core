@@ -1,0 +1,19 @@
+{
+    "name": "bytes/php-libs",
+    "description": "Generic PHP classes for rapid prototyping and software development",
+    "type": "library",
+    "license": "proprietary",
+    "autoload": {
+        "psr-4": {
+            "Bytes\\PhpLibs\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Sebastian Räse",
+            "email": "sebastian.raese@hauptstadtbytes.de"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
