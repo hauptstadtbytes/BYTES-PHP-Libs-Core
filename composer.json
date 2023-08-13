@@ -1,5 +1,5 @@
 {
-    "name": "bytes/php-libs-core",
+    "name": "bytesgmbh/php-libs-core",
     "description": "Generic PHP classes for rapid prototyping and software development",
     "type": "library",
     "license": "proprietary",
