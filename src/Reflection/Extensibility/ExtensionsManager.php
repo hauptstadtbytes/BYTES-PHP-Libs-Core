@@ -6,8 +6,11 @@ namespace Bytes\PhpLibs\Reflection\Extensibility;
 //import class(es) required
 use Bytes\PhpLibs\Reflection\ClassMetadata as ClassMetadata;
 
-require_once(__DIR__."/../../Primitives/Strings.php");
-use Bytes\PhpLibs\Primitives\StringHelper as StringHelper;
+require_once(__DIR__."/../../Primitives/Strings/Helper.php");
+use Bytes\PhpLibs\Primitives\Strings\Helper as StringHelper;
+
+require_once(__DIR__."/../../IO/Helper.php");
+use Bytes\PhpLibs\IO\Helper as IOHelper;
 
 //the manager class
 class ExtensionsManager{
@@ -57,29 +60,8 @@ class ExtensionsManager{
         //create the output value
         $output = array();
 
-        if($paths != null) {
-
-            foreach($paths as $path) { //loop for each path found
-
-                if(is_dir($path)){ //check if the given path points to a directory
-
-                     //call method recursively for each file and folder inside the directory
-                    //based on the article found at 'http://www.php.net/manual/de/function.scandir.php'
-                    foreach(scandir($path) as $objectKey => $objectValue){
-
-                        if(!in_array($objectValue,array(".",".."))) { //ignore default file system objects
-            
-                            $output = array_merge($output,$this->GetExtensions(array($path.DIRECTORY_SEPARATOR.$objectValue)));
-                        
-                        }
-                    }
-
-                } else { //continue for a file path
-                    $output = array_merge($output,$this->GetFileExtensions($path));
-                }
-
-            }
-
+        foreach(IOHelper::Files($paths) as $file) {
+            $output = array_merge($output,$this->GetFileExtensions($file));
         }
 
         //validate the extension(s) found

@@ -1,9 +1,9 @@
 <?php
 
 //set the namespace
-namespace Bytes\PhpLibs\Primitives;
+namespace Bytes\PhpLibs\Primitives\Strings;
 
-class StringHelper{
+class Helper{
 
 //method returning a boolean value indicating wheather a string starts with a specific substring or not
 static function StartsWith(string $haystack, string $needle):bool {
