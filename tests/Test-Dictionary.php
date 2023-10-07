@@ -15,7 +15,6 @@ require_once(__DIR__.'/../vendor/autoload.php');
 //create a set of sample data
 $sampleData = array("one" => "red", "two" => "yellow", "three" => "pink", "four" => "green");
 
-
 //create the dictionary
 $dic = new Dictionary($sampleData);
 $dic->five = "orange"; //add an additional item
@@ -30,5 +29,23 @@ foreach($keys as $key){
 }
 
 //check for a specific key
-echo("...and it contains the key 'five': ".$dic->ContainsKey("five"));
+echo("...and it contains the key 'five': ".$dic->ContainsKey("five")."<br /><br />");
+
+//create a dictionary with default values
+$animalDic = new Dictionary(null,["dog" => "Waldi", "cat" => "Mitzie", "bird" =>"","fish" =>""]);
+//$animalDic = new Dictionary(null,["dog" => "Waldi", "cat" => "Mitzie", "bird" =>"","fish" =>""],false); //make the dictionary case-sensitive
+
+echo("<strong>The following animals are known:</strong><br />");
+foreach($animalDic->Keys() as $key){
+    echo($key.": ".$animalDic->$key."<br />");
+}
+
+echo("<br />");
+
+//load additional data
+$animalDic->Load(["Fish" => "Blub"]);
+
+foreach($animalDic->Keys() as $key){
+    echo($key.": ".$animalDic->$key."<br />");
+}
 ?>

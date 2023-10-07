@@ -7,25 +7,39 @@ namespace Bytes\PhpLibs\Primitives;
 class Dictionary{
 
     //protected variable(s)
+    protected $caseInsensitive = true;
     protected $pairs = array();
 
     //constructor method
-    function __construct(array $items = null) {
+    function __construct(array $items = null, array $defaults = null, $caseInsensitive = true) {
+
+        //set the case sensitivity
+        $this->caseInsensitive = $caseInsensitive;
     
-        if(!is_null($items)) {
+        //set the default item(s)
+        if(!is_null($defaults)) {
             
-            $this->pairs = array_change_key_case($items,CASE_LOWER);
+            $this->pairs = array_change_key_case($defaults,CASE_LOWER);
             
+        }
+
+        //load the item(s)
+        if(!is_null($items)){
+            $this->Load($items);
         }
         
     }
 
     //getter method
     function __get(string $key) {
+
+        if($this->caseInsensitive){
+            $key = strtolower($key);
+        }
         
-        if(array_key_exists(strtolower($key), $this->pairs)) {
+        if(array_key_exists($key, $this->pairs)) {
             
-            return $this->pairs[strtolower($key)];
+            return $this->pairs[$key];
             
         } else {
             
@@ -37,9 +51,26 @@ class Dictionary{
     
     //setter method
     function __set(string $key, $value) {
+
+        if($this->caseInsensitive){
+            $key = strtolower($key);
+        }
         
-        $this->pairs[strtolower($key)] = $value;
+        $this->pairs[$key] = $value;
         
+    }
+
+    //method loading an array of values
+    public function Load(array $items){
+
+        if($this->caseInsensitive){
+            $items = array_change_key_case($items,CASE_LOWER);
+        }
+
+        foreach($items as $key => $value){
+            $this->pairs[$key] = $value;
+        }
+
     }
 
     //method returning a list of all keys
@@ -50,8 +81,12 @@ class Dictionary{
 
     //method for checking for a specific key
     public function ContainsKey(string $key):bool {
+
+        if($this->caseInsensitive){
+            $key = strtolower($key);
+        }
             
-        if(array_key_exists(strtolower($key), $this->pairs)) {
+        if(array_key_exists($key, $this->pairs)) {
                 
             return true;
                 
@@ -95,12 +130,16 @@ class Dictionary{
         
     //method for checking for a specific key-value pair
     public function ContainsPair(string $key, string $value, bool $ignoreCase = true):bool {
+
+        if($this->caseInsensitive){
+            $key = strtolower($key);
+        }
             
         if($ignoreCase) { //checks if ignoring the case was requested
             
             foreach($this->pairs as $currKey => $currValue) {
                 
-                if(($currKey == strtolower($key)) && (strtolower($currValue) == strtolower($value))) {
+                if(($currKey == $key) && (strtolower($currValue) == strtolower($value))) {
                     
                     return true;
                 
@@ -110,9 +149,9 @@ class Dictionary{
         
         } else { //continue if case sensity was requested
         
-            if($this->ContainsKey(strtolower($key))) {
+            if($this->ContainsKey($key)) {
                 
-                if($this->pairs[strtolower($key)] == $value) {
+                if($this->pairs[$key] == $value) {
                     
                     return true;
                         
