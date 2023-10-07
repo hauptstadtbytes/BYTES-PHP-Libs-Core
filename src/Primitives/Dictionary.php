@@ -79,6 +79,13 @@ class Dictionary{
         return array_keys($this->pairs);
     }
 
+    //returns all key-value pairs
+    public function Pairs():array{
+
+        return $this->Pairs;
+
+    }
+
     //method for checking for a specific key
     public function ContainsKey(string $key):bool {
 
