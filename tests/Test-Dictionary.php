@@ -19,6 +19,10 @@ $sampleData = array("one" => "red", "two" => "yellow", "three" => "pink", "four"
 $dic = new Dictionary($sampleData);
 $dic->five = "orange"; //add an additional item
 
+//dump all values
+var_dump($dic->Pairs());
+echo("<br /><br />");
+
 //iterate through all colors
 $keys = $dic->Keys();
 

@@ -82,7 +82,7 @@ class Dictionary{
     //returns all key-value pairs
     public function Pairs():array{
 
-        return $this->Pairs;
+        return $this->pairs;
 
     }
 
