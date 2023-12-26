@@ -6,18 +6,40 @@ namespace Bytes\PhpLibs\Primitives\Strings;
 class Helper{
 
 //method returning a boolean value indicating wheather a string starts with a specific substring or not
-static function StartsWith(string $haystack, string $needle):bool {
+static function StartsWith(string $haystack, string $needle, bool $caseSensitive = false) : bool {
 
     $length = strlen($needle);
 
-    return (substr($haystack, 0, $length) === $needle);
+    if($caseSensitive == false) {
+
+      $haystack = strtolower($haystack);
+      $needle = strtolower($needle);
+
+    }
+
+    if(substr($haystack, 0, $length) == $needle){
+
+      return true;
+
+    } else {
+
+      return false;
+
+    }
 
 }
 
 //method returning a boolean value indicating wheather a string ends with a specific substring or not
-static function EndsWith(string $haystack, string $needle):bool {
+static function EndsWith(string $haystack, string $needle, bool $caseSensitive = false) : bool {
 
      $length = strlen($needle);
+
+     if($caseSensitive == false) {
+
+      $haystack = strtolower($haystack);
+      $needle = strtolower($needle);
+
+    }
 
      if ($length == 0) {
 
@@ -25,22 +47,39 @@ static function EndsWith(string $haystack, string $needle):bool {
 
      }
 
-     return (substr($haystack, -$length) === $needle);
+     if(substr($haystack, -$length) == $needle){
+
+      return true;
+
+    } else {
+
+      return false;
+
+    }
+
+     //return (substr($haystack, -$length) === $needle);
 
  }
 
  //method returning a boolean value indicating wheather a substring is contained in a string or not
- static function Contains(string $haystack, string $needle):bool {
+ static function Contains(string $haystack, string $needle, bool $caseSensitive = false):bool {
 
-      if(strpos($haystack,$needle)!== false){
+    if($caseSensitive == false) {
 
-        return true;
+      $haystack = strtolower($haystack);
+      $needle = strtolower($needle);
 
-      } else {
+    }
 
-        return false;
+    if(strpos($haystack,$needle)!== false){
 
-      }
+      return true;
+
+    } else {
+
+      return false;
+
+    }
 
 }
 
